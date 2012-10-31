@@ -14,10 +14,9 @@ EX:
 @Karkat_Stupid blarhagahl
 
 Inserting underscores underlines the text between them, e.g. _blah blah blah_
-Inserting /0xff00ff colours all following text with the specificed colour.
-Insterting /0x/ ends the previously specified behaviour.
+Inserting #ff00ff colours all following text with the specificed colour.
+Insterting ## ends the previously specified behaviour.
 */
-
 
 
 
