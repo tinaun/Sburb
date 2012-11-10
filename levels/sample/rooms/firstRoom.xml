@@ -41,6 +41,12 @@ is entered for the first time. -->
 	<asset name='firstRoomFG_3_0' type='graphic'>backgrounds/slices/firstRoomFG_3_0.png</asset>
 	<asset name='firstRoomFG_3_1' type='graphic'>backgrounds/slices/firstRoomFG_3_1.png</asset>
 	<asset name='firstRoomFG_3_2' type='graphic'>backgrounds/slices/firstRoomFG_3_2.png</asset>
+	<asset name='daveInitSheet' type='graphic'>chars/dave/daveInitSheet.png</asset>
+    <asset name='daveIdleSheet' type='graphic'>chars/dave/daveIdleSheet.png</asset>
+    <asset name='daveRunSheet' type='graphic'>chars/dave/daveRunSheet.png</asset>
+    <asset name='daveAttackSheet' type='graphic'>chars/dave/daveAttackSheet.png</asset>
+    <asset name='daveHurtSheet' type='graphic'>chars/dave/daveHurtSheet.png</asset>
+    <asset name='daveDeadSheet' type='graphic'>chars/dave/daveDeadSheet.png</asset>
 	
 	<!-- The map is a special black-and-white image describing walkable areas in
 	a room. White pixels are walkable, black are unwalkable. This actually consumes
@@ -77,46 +83,16 @@ safe than sorry.-->
 	it's incredibly useful and easy to use. -->
   <room name='firstRoom' walkableMap='firstRoomMap' scale='4'>
   
-  	<!-- here we drop in our character. Since we specified everything in 
-  	chars/meenah.xml, we don't have to do much here. We just need to specify
-  	her location. Note that class='meenah' will fill in all the values we
-  	didn't specify using the class in chars/meenah.xml, including any
-  	internal tags that may have been part of the class. Template classes
-  	are a great way to seperate logic and content, as well as recycle common
-  	patterns. -->
-  	<character class='meenah' x='500' y='500'>
-  		<action class='beMeenah'/>
-  	</character>
-  
-  	<character class='karkat' x='420' y='500'>
-  		<action class='beKarkat'/>
-  		<action command='talk' name='Talk.'>
-  			<args>
-  				@meenah_talk Hey what're you doing in my sample. 
-  				@meenah_angrytalk This is my sample I swear to god I will fight you. Get out. Get ouuuuuut.
-  				@karkat_talk what
-  				@meenah_annoyed ouuuuuuut
-  			</args>
-  		</action>
-  	</character>
-  	
-  	<character class='karkat' name='karkat2' x='620' y='450'>
-  		<action command='follow' sprite='meenah' name='Follow.'>
-  			<args>karkat2,meenah</args>
-  			<action command='removeAction' noDelay='true'>
-  				<args>karkat2,Follow.</args>
-  			</action>
-  		</action>
-  	</character>
-  	
-  	<character class='karkat' name='karkat3' x='620' y='650'>
-  		<action command='follow' sprite='meenah' name='Follow.'>
-  			<args>karkat3,meenah</args>
-  			<action command='removeAction' noDelay='true'>
-  				<args>karkat3,Follow.</args>
-  			</action>
-  		</action>
-  	</character>
+    <fighter name='dave' x='300' y='300' width='80' height='50' state='init'>
+  	 	<animation name='init' sheet='daveInitSheet' x='-55' y='-60' length='6' loopNum='0' frameInterval='2' followUp='idle'/>
+  	 	<animation name='idle' sheet='daveIdleSheet' x='-55' y='-60'  length='8' frameInterval='2'/>
+  	 	<animation name='walk' sheet='daveRunSheet' x='-55' y='-60' length='8' frameInterval='2'/>
+  	 	<animation name='hurt' sheet='daveHurtSheet' x='-55' y='-60' length='4' loopNum='0' frameInterval='2' followUp='idle'/>
+  	 	<animation name='attack' sheet='daveAttackSheet' x='-55' y='-60' length='6' loopNum='0' frameInterval='2' followUp='walk'/>
+  	 	<animation name='dead' sheet='daveDeadSheet' x='-55' y='-60' loopNum='0' frameInterval='10' followUp='init'/>
+  	 	<action name='whatup!' command='talk'>@! what up!</action>
+    </fighter>
+	
   	<!-- here we're adding a standard chest based on a template class found in
   	etc/standardTemplates.xml -->
   	<sprite class='chest1' name='chest1' x='166' y='498'>
