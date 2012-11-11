@@ -83,7 +83,7 @@ safe than sorry.-->
 	it's incredibly useful and easy to use. -->
   <room name='firstRoom' walkableMap='firstRoomMap' scale='4'>
   
-    <fighter name='dave' x='300' y='300' width='80' height='50' state='init'>
+    <fighter name='dave' x='300' y='500' width='80' height='50' state='init'>
   	 	<animation name='init' sheet='daveInitSheet' x='-55' y='-60' length='6' loopNum='0' frameInterval='2' followUp='idle'/>
   	 	<animation name='idle' sheet='daveIdleSheet' x='-55' y='-60'  length='8' frameInterval='2'/>
   	 	<animation name='walk' sheet='daveRunSheet' x='-55' y='-60' length='8' frameInterval='2'/>
