@@ -5,6 +5,9 @@ var Sburb = (function(Sburb){
 
 ////////////////////////////////////////
 //Fighter Class (inherits Sprite)
+//
+// has health and charge bars for a special attack.
+//
 ////////////////////////////////////////
 
 //Fighter
@@ -16,6 +19,8 @@ Sburb.Fighter = function(name,x,y,width,height){
 	this.friction = 0.87;
 	this.vx = 0;
 	this.vy = 0;
+	this.health = 100;
+	this.grit = 0;
 	this.facing = "Right";
 }
 
@@ -31,6 +36,15 @@ Sburb.Fighter.prototype.update = function(curRoom){
 //parse keyboard input into movements
 Sburb.Fighter.prototype.handleInputs = function(pressed){
 	var moved = false;
+	if(pressed[Sburb.Keys.z]){
+		this.friction = 0.7;
+		this.decel = 0.5;
+		this.charge();
+	} else {
+		this.friction = 0.87;
+		this.decel = 1;
+		this.grit = 0;
+	}
 	if(pressed[Sburb.Keys.down] || pressed[Sburb.Keys.s]){
 		this.moveDown(); moved = true;
 	}else if(pressed[Sburb.Keys.up] || pressed[Sburb.Keys.w]){
@@ -68,10 +82,24 @@ Sburb.Fighter.prototype.attack = function(){
 	this.startAnimation("attack");
 }
 
+//hurt
+Sburb.Fighter.prototype.hurt = function(amount){
+	this.health -= amount;
+	if(health < 1){
+		this.startAnimation("dead");
+	}	
+}
+
+Sburb.Fighter.prototype.charge = function(){
+	if(this.charge > 100){
+		this.grit += 5;
+	}
+}
+
 //impulse fighter to move up
 Sburb.Fighter.prototype.moveUp = function(){
 	this.walk();
-	this.vy-=this.accel;
+	this.vy-=this.accel * 0.8;
 }
 //impulse fighter to move down
 Sburb.Fighter.prototype.moveDown = function(){

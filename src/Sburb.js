@@ -29,7 +29,7 @@ Array.prototype.destroy = function(obj) {
 
 var Sburb = (function(Sburb){
 //650x450 screen
-Sburb.Keys = {backspace:8,tab:9,enter:13,shift:16,ctrl:17,alt:18,escape:27,space:32,left:37,up:38,right:39,down:40,w:87,a:65,s:83,d:68,tilde:192};
+Sburb.Keys = {backspace:8,tab:9,enter:13,shift:16,ctrl:17,alt:18,escape:27,space:32,left:37,up:38,right:39,down:40,w:87,a:65,s:83,d:68,tilde:192,z:90};
 
 Sburb.name = 'Jterniabound';
 Sburb.version = '1.0';
