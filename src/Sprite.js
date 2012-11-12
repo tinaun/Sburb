@@ -49,6 +49,13 @@ Sprite.prototype.update = function(curRoom){
 			this.animation.update();
 		}
 	}
+	if(Sburb.engineMode === "strife"){
+		var x = Sburb.Mouse.x + Sburb.Stage.x;
+		var y = Sburb.Mouse.y + Sburb.Stage.y;
+		if(this.collidable && this.hitsPoint(x,y)){
+			Sburb.Stage.style.cursor = "pointer";
+		}
+	}
 }
 
 Sprite.prototype.draw = function(){
