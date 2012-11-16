@@ -21,6 +21,7 @@ Sburb.Fighter = function(name,x,y,width,height){
 	this.vy = 0;
 	this.health = 100;
 	this.grit = 0;
+	this.vials = {};
 	this.facing = "Right";
 }
 
@@ -47,8 +48,10 @@ Sburb.Fighter.prototype.handleInputs = function(pressed){
 	}
 	if(pressed[Sburb.Keys.down] || pressed[Sburb.Keys.s]){
 		this.moveDown(); moved = true;
+		this.faceForwards();
 	}else if(pressed[Sburb.Keys.up] || pressed[Sburb.Keys.w]){
 		this.moveUp(); moved = true;
+		this.faceBack();
 	}
 	if(pressed[Sburb.Keys.left] || pressed[Sburb.Keys.a]){
 		this.moveLeft(); moved = true;
@@ -68,11 +71,30 @@ Sburb.Fighter.prototype.idle = function(){
 	if(this.state=="walk"){
 		this.startAnimation("idle");
 	}
+	else if(this.state=="walkBack"){
+		this.startAnimation("idleBack");
+	}
+	
 }
 
 //walk
 Sburb.Fighter.prototype.walk = function(){
 	if(this.state=="idle"){
+		this.startAnimation("walk");	
+	}
+	else if(this.state=="idleBack"){
+		this.startAnimation("walkBack");
+	}
+}
+
+Sburb.Fighter.prototype.faceBack = function(){
+	if(this.state=="walk"){
+		this.startAnimation("walkBack");
+	}
+}
+
+Sburb.Fighter.prototype.faceForwards = function(){
+	if(this.state=="walkBack"){
 		this.startAnimation("walk");
 	}
 }
@@ -84,9 +106,14 @@ Sburb.Fighter.prototype.attack = function(){
 
 //hurt
 Sburb.Fighter.prototype.hurt = function(amount){
-	this.health -= amount;
-	if(health < 1){
+	this.startAnimation("hurt");
+	this.vx = -this.vx;
+	this.vy = -this.vy;
+	this.health -= (amount?amount:5);
+	if(this.health < 1){
 		this.startAnimation("dead");
+		this.health = 100;
+		Sburb.curRoom.removeSprite(this);
 	}	
 }
 
@@ -94,6 +121,10 @@ Sburb.Fighter.prototype.charge = function(){
 	if(this.charge > 100){
 		this.grit += 5;
 	}
+}
+
+Sburb.Fighter.prototype.speed = function(){
+	return Math.sqrt(Math.abs(this.vx) + Math.abs(this.vy));
 }
 
 //impulse fighter to move up
@@ -174,6 +205,9 @@ Sburb.Fighter.prototype.getBoundaryQueries = function(dx,dy){
 Sburb.Fighter.prototype.tryToMove = function(room){
 	this.vx*=this.friction;
 	this.vy*=this.friction;
+	if(Sburb.engineMode === "strife" && this.speed() > 2){
+		Sburb.chooser.choosing = false;
+	}
 	if(Math.abs(this.vx)<this.decel){
 		this.vx = 0;
 	}
@@ -201,6 +235,14 @@ Sburb.Fighter.prototype.tryToMove = function(room){
 	
 	var collides = room.collides(this);
 	if(collides){
+		if(Sburb.engineMode === "strife" && (collides instanceof Sburb.Fighter)){
+			if(this.animation.name === "attack"){
+				collides.hurt(10);
+			} else {
+				this.hurt();
+			}
+		}
+		console.log(Sburb.char.health + " " +  collides.health + " " +collides.vx);
 		var tx = 0;
 		var ty = 0;
 		var theta = Math.atan2(this.y-collides.y,this.x-collides.x);

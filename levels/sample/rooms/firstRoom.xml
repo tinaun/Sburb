@@ -41,12 +41,20 @@ is entered for the first time. -->
 	<asset name='firstRoomFG_3_0' type='graphic'>backgrounds/slices/firstRoomFG_3_0.png</asset>
 	<asset name='firstRoomFG_3_1' type='graphic'>backgrounds/slices/firstRoomFG_3_1.png</asset>
 	<asset name='firstRoomFG_3_2' type='graphic'>backgrounds/slices/firstRoomFG_3_2.png</asset>
+	<asset name='roseRoomBG' type='graphic'>backgrounds/RoseRoomBG.png</asset>
+	<asset name='roseRoomMap' type='graphic'>backgrounds/roseRoomMap.png</asset>
 	<asset name='daveInitSheet' type='graphic'>chars/dave/daveInitSheet.png</asset>
     <asset name='daveIdleSheet' type='graphic'>chars/dave/daveIdleSheet.png</asset>
     <asset name='daveRunSheet' type='graphic'>chars/dave/daveRunSheet.png</asset>
     <asset name='daveAttackSheet' type='graphic'>chars/dave/daveAttackSheet.png</asset>
     <asset name='daveHurtSheet' type='graphic'>chars/dave/daveHurtSheet.png</asset>
     <asset name='daveDeadSheet' type='graphic'>chars/dave/daveDeadSheet.png</asset>
+	<asset name='johnIdle' type='graphic'>chars/john/johnIdle.png</asset>
+	<asset name='johnIdleBack' type='graphic'>chars/john/johnIdleBack.png</asset>
+	<asset name='johnRun' type='graphic'>chars/john/johnWalkFront.png</asset>
+	<asset name='johnRunBack' type='graphic'>chars/john/johnWalkBack.png</asset>
+	<asset name='johnAttack' type='graphic'>chars/john/johnAttackSheet.png</asset>
+	<asset name='impIdleSheet' type='graphic'>chars/imp/impIdleSheet.png</asset>
 	
 	<!-- The map is a special black-and-white image describing walkable areas in
 	a room. White pixels are walkable, black are unwalkable. This actually consumes
@@ -83,14 +91,47 @@ safe than sorry.-->
 	it's incredibly useful and easy to use. -->
   <room name='firstRoom' walkableMap='firstRoomMap' scale='4'>
   
-    <fighter name='dave' x='300' y='500' width='80' height='50' state='init'>
-  	 	<animation name='init' sheet='daveInitSheet' x='-55' y='-60' length='6' loopNum='0' frameInterval='2' followUp='idle'/>
-  	 	<animation name='idle' sheet='daveIdleSheet' x='-55' y='-60'  length='8' frameInterval='2'/>
-  	 	<animation name='walk' sheet='daveRunSheet' x='-55' y='-60' length='8' frameInterval='2'/>
-  	 	<animation name='hurt' sheet='daveHurtSheet' x='-55' y='-60' length='4' loopNum='0' frameInterval='2' followUp='idle'/>
-  	 	<animation name='attack' sheet='daveAttackSheet' x='-55' y='-60' length='6' loopNum='0' frameInterval='2' followUp='walk'/>
-  	 	<animation name='dead' sheet='daveDeadSheet' x='-55' y='-60' loopNum='0' frameInterval='10' followUp='init'/>
-  	 	<action name='whatup!' command='talk'>@! what up!</action>
+    <triggers>
+		
+          <trigger>
+            spriteProperty,char,x > 1680
+              <action command='deltaSprite'>
+			    <args>char,-20,0</args>
+			    <action command='fadeOut'>
+                  <action command='talk'>
+                    <args>@! You can't go that way.</args>
+                  </action>
+				</action>  
+              </action>
+          </trigger>
+		  
+	</triggers>
+	
+	<fighter name='dave' x='300' y='500' width='120' height='75' state='init'>
+  	 	<animation name='init' sheet='daveInitSheet' x='-100' y='-120' length='6' loopNum='0' frameInterval='2' followUp='idle'/>
+  	 	<animation name='idle' sheet='daveIdleSheet' x='-100' y='-120'  length='8' frameInterval='2'/>
+  	 	<animation name='walk' sheet='daveRunSheet' x='-100' y='-120' length='8' frameInterval='2'/>
+  	 	<animation name='hurt' sheet='daveHurtSheet' x='-100' y='-120' length='4' loopNum='0' frameInterval='2' followUp='idle'/>
+  	 	<animation name='attack' sheet='daveAttackSheet' x='-100' y='-120' length='6' loopNum='0' frameInterval='2' followUp='walk'/>
+  	 	<animation name='dead' sheet='daveDeadSheet' x='-100' y='-120' loopNum='0' frameInterval='40' followUp='init'/>
+  	 	<action name='whatup!' command='talk'>@! what upp! suck</action>
+    </fighter>
+	
+	<fighter name='john' x='1300' y='700' width='120' height='75' state='idle'>
+  	 	<animation name='idle' sheet='johnIdle' x='-100' y='-120'  length='1' frameInterval='2'/>
+  	 	<animation name='walk' sheet='johnRun' x='-100' y='-120' length='2' frameInterval='3'/>
+  	 	<animation name='idleBack' sheet='johnIdleBack' x='-100' y='-120' length='1' frameInterval='2'/>
+  	 	<animation name='walkBack' sheet='johnRunBack' x='-100' y='-120' length='2' frameInterval='3'/>
+  	 	<animation name='attack' sheet='johnAttack' x='-100' y='-220' length='5' loopNum='0' frameInterval='3' followUp='walk'/>
+  	 	<action name='what have we here...' command='talk'>@! a boy, thats who!</action>
+		<action name='be john' command='changeChar'>john</action>
+		<action name='go to next area' command='changeRoom'>roseRoom,300,700</action>
+    </fighter>
+	
+	<fighter name='imp' x='800' y='500' width='191' height='75' facing="left" state='idle'>
+  	 	<animation name='idle' sheet='impIdleSheet' x='-95' y='-150'  length='5' frameInterval='3'/>
+  	 	<action name='what is this thing?' command='talk'>@! that is an imp, dummy!</action>
+		<action name='be the imp.' command='changeChar'>imp</action>
     </fighter>
 	
   	<!-- here we're adding a standard chest based on a template class found in
@@ -119,6 +160,12 @@ safe than sorry.-->
 		<!-- note depthing='2' is what puts this in the foreground -->
 		<sprite name='firstRoomFG' depthing='2'>
     	<animation sheet='firstRoomFG' sliced='true' numCols='4' numRows='3' colSize='500' rowSize='500'/>
+    </sprite>
+  </room>
+  
+  <room name="roseRoom" walkableMap="roseRoomMap" scale="4">
+	<sprite name='roseRoomBG'>
+    	<animation sheet='roseRoomBG'/>
     </sprite>
   </room>
 </rooms>

@@ -66,6 +66,9 @@ commands.changeChar = function(info){
 	Sburb.char.becomeNPC();
 	Sburb.char.moveNone();
 	Sburb.char.walk();
+	if(Sburb.gameMode === "strife"){
+		Sburb.char.idle();
+	}	
 	Sburb.destFocus = Sburb.char = Sburb.sprites[info];
 	Sburb.char.becomePlayer();
 	Sburb.setCurRoomOf(Sburb.char);

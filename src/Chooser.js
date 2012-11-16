@@ -10,6 +10,7 @@ var Sburb = (function(Sburb){
 //constructor
 Sburb.Chooser = function(){
 	this.choosing = false;
+	this.loaded = false; // removes race condition in strife mode
 	this.choices = [];
 	this.choice = 0;
 	this.dialogs = [];
@@ -30,6 +31,7 @@ Sburb.Chooser.prototype.prevChoice = function(){
 
 //initialize chooser
 Sburb.Chooser.prototype.beginChoosing = function(x,y){
+	this.loaded = false;
 	var width = this.minWidth;
 	var height = 0;
 	var basis = new Sburb.FontEngine();
@@ -50,8 +52,14 @@ Sburb.Chooser.prototype.beginChoosing = function(x,y){
 	if(y+height>Sburb.Stage.y+Sburb.Stage.height-10){
 		y = Sburb.Stage.y+Sburb.Stage.height-height-10;
 	}
-	
-	
+	if(Sburb.engineMode = "strife"){
+		x = Sburb.Mouse.x + Sburb.Stage.x + 10;
+		y = Sburb.Mouse.y + Sburb.Stage.y + 10;
+		console.log(x);
+		if(Sburb.Mouse.x + width > Sburb.Stage.width){
+			x -= width;
+		}
+	}
 	this.choosing = true;
 	this.choice = 0;
 	this.dialogs = [];
@@ -68,8 +76,10 @@ Sburb.Chooser.prototype.draw = function(){
 	if(this.choosing){
 		Sburb.stage.save();
 		var x,y,width=this.minWidth,height=0,i;
+		
 		x = this.dialogs[0].x;
 		y = this.dialogs[0].y-1;
+		
 		for(i=0;i<this.dialogs.length;i++){
 			width = Math.max(width,this.dialogs[i].lines[0].length*this.dialogs[i].charWidth+10);
 		}
@@ -106,7 +116,46 @@ Sburb.Chooser.prototype.update = function(){
 				curDialog.color = "#ffffff";
 			}
 		}
+		if(Sburb.engineMode === "strife"){
+			this.updateMouse();
+		}
 	}
+	
+}
+
+Sburb.Chooser.prototype.updateMouse = function(){
+	var x = Sburb.Mouse.x + Sburb.Stage.x - this.dialogs[0].x;
+	var y = Sburb.Mouse.y + Sburb.Stage.y - this.dialogs[0].y-1;
+	var width = this.minWidth;
+	var height = 0;
+	var basis = new Sburb.FontEngine();
+	for(i=0;i<this.choices.length;i++){
+		width = Math.max(width,(this.choices[i].name.length+3)*basis.charWidth+10);
+	}
+	height = basis.lineHeight*this.choices.length;
+	
+	
+	if(x < 0 || y < 0 || x > width || y > height){
+	  console.log("outside");
+	  this.choice = -1;
+	  if(Sburb.Mouse.down && this.loaded){
+		console.log("outside " + x + " " + y + " " + width);
+		this.choosing = false;
+	  }
+	  Sburb.Mouse.down = false;
+	}else {
+	var mouseDown = Sburb.Mouse.down;
+	Sburb.Stage.style.cursor = "pointer";	
+	this.choice = Math.floor(y / basis.lineHeight);
+	console.log(Sburb.Mouse.down);
+	if( mouseDown ){
+		Sburb.performAction(this.choices[this.choice]);
+		console.log("test");
+		this.choosing = false;
+	}
+	
+	}
+	this.loaded = true;
 }
 
 

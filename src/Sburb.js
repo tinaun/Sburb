@@ -372,7 +372,7 @@ function draw(){
 
 var _onkeydown = function(e){
     if(Sburb.updateLoop && !Sburb.inputDisabled) { // Make sure we are loaded before trying to do things
-	    if(Sburb.chooser.choosing){
+	    if(Sburb.chooser.choosing && Sburb.engineMode != "strife"){
 		    if(e.keyCode == Sburb.Keys.down || e.keyCode==Sburb.Keys.s){
 			    Sburb.chooser.nextChoice();
 		    }
@@ -397,7 +397,7 @@ var _onkeydown = function(e){
 					    break;
 				    }
 			    }
-			    if(Sburb.chooser.choices.length>0){
+			    if(Sburb.chooser.choices.length>0 && Sburb.engineMode != "strife"){
 				    Sburb.chooser.choices.push(new Sburb.Action("cancel","cancel","Cancel."));
 				    beginChoosing();
 			    }
@@ -452,7 +452,6 @@ Sburb.onMouseDown = function(e,canvas){
 	if(Sburb.engineMode=="strife" && hasControl()){
 		Sburb.chooser.choices = Sburb.curRoom.queryActionsVisual(Sburb.char,Sburb.Stage.x+Sburb.Mouse.x,Sburb.Stage.y+Sburb.Mouse.y);
 		if(Sburb.chooser.choices.length>0){
-			Sburb.chooser.choices.push(new Sburb.Action("cancel","cancel","cancel"));
 			beginChoosing();
 		}
 	}
@@ -513,7 +512,7 @@ function handleInputs(){
 	if(Sburb.Stage){
 		Sburb.Stage.style.cursor = "default";
 	}
-	if(hasControl() && !Sburb.inputDisabled){
+	if(hasControl() || Sburb.engineMode==="strife" && !Sburb.inputDisabled){
 		Sburb.char.handleInputs(Sburb.pressed, Sburb.pressedOrder);
 	}else{
 		Sburb.char.moveNone();
@@ -538,7 +537,7 @@ function drawHud(){
 
 function hasControl(){
 	return !Sburb.dialoger.talking 
-		&& !Sburb.chooser.choosing 
+		&& !Sburb.chooser.choosing
 		&& !Sburb.destRoom  
 		&& !Sburb.fading 
 		&& !Sburb.destFocus;
