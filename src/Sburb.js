@@ -66,6 +66,7 @@ Sburb.nextQueueId = 0; //the next created actionQueue, specified without a id, w
 Sburb.bgm = null; //the current background music
 Sburb.hud = null; //the hud; help and sound buttons
 Sburb.Mouse = {down:false,x:0,y:0}; //current recorded properties of the mouse
+Sburb.customMouse = null;
 Sburb.waitFor = null;
 Sburb.engineMode = "wander";
 Sburb.fading = false;
@@ -259,12 +260,20 @@ Sburb.initialize = function(div,levelName,includeDevTools){
     mapCanvas.style.display = "none";
     gameDiv.appendChild(mapCanvas);
 	
+	var imgCanvas = document.createElement("canvas");
+    mapCanvas.id = "SBURBImgCanvas";
+    mapCanvas.width = 1;
+    mapCanvas.height = 1;
+    mapCanvas.style.display = "none";
+    gameDiv.appendChild(imgCanvas);
+	
 	document.getElementById(div).appendChild(deploy);
     
     // Copy local variables into Sburb
     Sburb.Container = deploy;
     Sburb.Game = gameDiv;
     Sburb.Map = mapCanvas;
+	Sburb.Pixels = imgCanvas;
     Sburb.Stage = gameCanvas;
     Sburb.Bins["movie"] = movieDiv;
     Sburb.Bins["font"] = fontDiv;
@@ -325,6 +334,9 @@ function update(){
 	handleAudio();
 	handleInputs();
 	handleHud();
+	if(Sburb.customMouse)
+		Sburb.customMouse.update();
+	
 	
 	if(!Sburb.loadingRoom)
 	    Sburb.curRoom.update();
@@ -365,6 +377,10 @@ function draw(){
 	
 		Sburb.stage.restore();
 		Sburb.Stage.offset = false;
+		
+		if(Sburb.hud["mouse"]){
+			Sburb.hud["mouse"].draw();
+		}
 		
 	    Sburb.debugger.draw();
 	}
@@ -530,8 +546,9 @@ function handleHud(){
 
 function drawHud(){
 	for(var content in Sburb.hud){
-	    if(!Sburb.hud.hasOwnProperty(content)) continue;
-	    Sburb.hud[content].draw();
+	    if(!Sburb.hud.hasOwnProperty(content))continue;
+		if(content != "mouse")
+			Sburb.hud[content].draw();
 	}
 }
 

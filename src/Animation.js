@@ -91,11 +91,16 @@ Sburb.Animation.prototype.nextFrame = function() {
 
 //update the animation as if a frame of time has elapsed
 Sburb.Animation.prototype.update = function(){
+	this.loadTransparentPx()
 	this.curInterval++;
 	while(this.curInterval>this.frameInterval){
 		this.curInterval-=this.frameInterval;
 		this.nextFrame();
 	}
+}
+
+Sburb.Animation.prototype.loadTransparentPx = function(){
+	var stage;
 }
 
 //draw the animation
@@ -329,7 +334,11 @@ Sburb.Animation.prototype.setSheet = function(newSheet){
 Sburb.Animation.prototype.isVisuallyUnder = function(x,y){
 	if(x>=this.x && x<=this.x+this.colSize){
 		if(y>=this.y && y<=this.y+this.rowSize){
-			return true;
+			if(Sburb.engineMode === "strife"){
+				return true;
+			} else {
+				return true;
+			}	
 		}
 	}
 	return false;

@@ -17,7 +17,11 @@ Sburb.SpriteButton = function(name,x,y,width,height,sheet,action){
 	this.action?action:null;
 	
 	for(var i=0;i<(sheet.width/this.width)*(sheet.height/this.height);i++){
-		this.addAnimation(new Sburb.Animation("state"+i,sheet,0,0,width,height,i,1,1000));
+		var offset = 0;
+		if(this.name === "mouse"){
+			offset = -15;
+		}	
+		this.addAnimation(new Sburb.Animation("state"+i,sheet,offset,0,width,height,i,1,1000));
 	}
 	
 	this.startAnimation("state0");
@@ -27,7 +31,10 @@ Sburb.SpriteButton.prototype = new Sburb.Sprite();
 
 Sburb.SpriteButton.prototype.update = function(){
 	Sburb.Sprite.prototype.update.call(this);
+	if(this.name != "mouse"){
 	this.updateMouse();
+	}
+	else {this.moveWithMouse()}
 }
 
 //update button in relation to mouse state
@@ -63,6 +70,18 @@ Sburb.SpriteButton.prototype.updateMouse = function(){
 	}
 	if(this.clicked && this.action){
 		Sburb.performAction(this.action);
+	}
+}
+
+Sburb.SpriteButton.prototype.moveWithMouse = function(){
+	this.x = Sburb.Mouse.x;
+	this.y = Sburb.Mouse.y;
+	var state = Sburb.Stage.style.cursor;
+	Sburb.Stage.style.cursor = "none";
+	if(state === "pointer"){
+		this.startAnimation("state1");
+	}else{
+		this.startAnimation("state0");
 	}
 }
 

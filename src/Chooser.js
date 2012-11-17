@@ -145,7 +145,11 @@ Sburb.Chooser.prototype.updateMouse = function(){
 	  Sburb.Mouse.down = false;
 	}else {
 	var mouseDown = Sburb.Mouse.down;
-	Sburb.Stage.style.cursor = "pointer";	
+	if(Sburb.hud["mouse"]){
+		Sburb.hud["mouse"].startAnimation("state1");
+	} else {
+		Sburb.Stage.style.cursor = "pointer";
+	}	
 	this.choice = Math.floor(y / basis.lineHeight);
 	console.log(Sburb.Mouse.down);
 	if( mouseDown ){

@@ -67,11 +67,11 @@ Sburb.Vial.prototype.hide(){
 //Related Utility Functions
 ///////////////////////////////////////////////
 
-Sburb.parseVial(
+Sburb.parseVial(vial){
+	var attributes = vial.attributes;
 
 
-
-
+}
 
 
 return Sburb;

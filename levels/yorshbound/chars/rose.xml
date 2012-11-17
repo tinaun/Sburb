@@ -1,0 +1,34 @@
+<sburb description='rose'>
+
+<classes>
+	
+	<fighter class='rose' name='rose' width='60' height='40'>
+		<animation name='idle' sheet='roseIdle' x='-120' y='-280'  length='2' frameInterval='5'/>
+  	 	<animation name='walk' sheet='roseWalk' x='-100' y='-280' length='4' frameInterval='3'/>
+  	 	<animation name='idleBack' sheet='roseIdleBack' x='-100' y='-280' length='2' frameInterval='4'/>
+  	 	<animation name='walkBack' sheet='roseWalkBack' x='-100' y='-280' length='4' frameInterval='3'/>
+	</fighter>
+	
+	<!-- common command to "be" the character. -->
+	<action class='beRose' name='Be Rose.' command='macro'>
+		<args>
+			<action command='changeChar' noDelay='true'>
+				<args>rose</args>
+				<action command='playSong' noDelay='true'>
+					<args>roseSong,0</args>
+				</action>
+			</action>
+		</args>
+	</action>
+</classes>
+
+<assets>
+	<asset name='roseWalk' type='graphic'>chars/rose/roseWalkSheet.png</asset>
+	<asset name='roseWalkBack' type='graphic'>chars/rose/roseWalkBackSheet.png</asset>
+	<asset name='roseIdle' type='graphic'>chars/rose/roseIdleSheet.png</asset>
+	<asset name='roseIdleBack' type='graphic'>chars/rose/roseIdleBackSheet.png</asset>
+
+	<!-- her background music -->
+	<asset name='roseSong' type='audio'>audio/music/smile.ogg;audio/music/smile.mp3</asset>
+</assets>
+</sburb>

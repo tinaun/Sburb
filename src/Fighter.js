@@ -99,6 +99,7 @@ Sburb.Fighter.prototype.faceForwards = function(){
 	}
 }
 
+
 //attack
 Sburb.Fighter.prototype.attack = function(){
 	this.startAnimation("attack");
@@ -130,12 +131,12 @@ Sburb.Fighter.prototype.speed = function(){
 //impulse fighter to move up
 Sburb.Fighter.prototype.moveUp = function(){
 	this.walk();
-	this.vy-=this.accel * 0.8;
+	this.vy-=this.accel * 0.7;
 }
 //impulse fighter to move down
 Sburb.Fighter.prototype.moveDown = function(){
 	this.walk();
-	this.vy+=this.accel;
+	this.vy+=this.accel * 0.7;
 }
 //impulse fighter to move left
 Sburb.Fighter.prototype.moveLeft = function(){
@@ -208,10 +209,10 @@ Sburb.Fighter.prototype.tryToMove = function(room){
 	if(Sburb.engineMode === "strife" && this.speed() > 2){
 		Sburb.chooser.choosing = false;
 	}
-	if(Math.abs(this.vx)<this.decel){
+	if(Math.abs(this.vx)<this.decel && this.state=="idle"){
 		this.vx = 0;
 	}
-	if(Math.abs(this.vy)<this.decel){
+	if(Math.abs(this.vy)<this.decel && this.state=="idle"){
 		this.vy = 0;
 	}
 	var vx = this.vx;

@@ -53,7 +53,11 @@ Sprite.prototype.update = function(curRoom){
 		var x = Sburb.Mouse.x + Sburb.Stage.x;
 		var y = Sburb.Mouse.y + Sburb.Stage.y;
 		if(this.collidable && this.hitsPoint(x,y)){
-			Sburb.Stage.style.cursor = "pointer";
+			if(Sburb.buttons["mouse"]){
+				Sburb.buttons["mouse"].startAnimation("state1");
+			} else {
+				Sburb.Stage.style.cursor = "pointer";
+			}	
 		}
 	}
 }

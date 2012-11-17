@@ -1,0 +1,114 @@
+<sburb description="first room">
+
+<dependencies>
+	<dependency>chars/rose.xml</dependency> <!-- loading in everything rose entails -->
+</dependencies>
+
+<assets>
+  <asset name='firstRoomFG' type='graphic'>rooms/roseRoomFG.png</asset>
+  <asset name='firstRoomBG' type='graphic'>rooms/roseRoomBG.png</asset>
+  <asset name='firstRoomMap' type='graphic'>rooms/roseRoomMap.png</asset>
+  
+  <!-- an item to be found in a chest, nothing special about it-->
+  <asset name='knittingBag' type='graphic'>objects/items/knittingBag.png</asset>
+  <asset name='journal' type='graphic'>objects/items/journals.png</asset>
+  <asset name='books' type='graphic'>objects/items/books.png</asset>
+  <asset name='bow' type='graphic'>objects/items/bow.png</asset>
+  <asset name='violin' type='graphic'>objects/items/violin.png</asset>
+  <asset name='table' type='graphic'>objects/items/table.png</asset>
+  <asset name='drawers' type='graphic'>objects/items/drawers.png</asset>
+  <asset name='bookshelf' type='graphic'>objects/items/bookcase.png</asset>
+  <asset name='catdoll' type='graphic'>objects/items/catdoll.png</asset>
+  <asset name='door' type='graphic'>objects/items/door.png</asset>
+</assets>
+
+<!-- We wrap all room tags in the rooms tag. This is mostly useless since it's
+not good practice to keep multiple rooms in one file, but hey, better
+safe than sorry.-->
+<rooms>
+  <room name='firstRoom' walkableMap='firstRoomMap' scale='4'>
+  
+	
+	<fighter class='rose' name='rose' x = '400' y = '700'>
+		<action command='talk' name='insert description here'>
+			<args>@! #ffffff insert description here</args>
+		</action>	
+	</fighter>
+	
+  	<!-- here we're adding a standard chest based on a template class found in
+  	etc/standardTemplates.xml -->
+	
+	<sprite name='knittingBag' x='756' y='355' width='80' height='80'>
+		<animation sheet='knittingBag' y='-57'/>
+		<action command='talk' name='knitting bag'>
+			<args>@! #ffffff insert description here</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='journal' x='629' y='350' width='13' height='13'>
+		<animation sheet='journal' y='0'/>
+		<action command='talk' name='journals'>
+			<args>@! #ffffff insert description here</args>
+		</action>	
+	</sprite>
+	<sprite name='catdoll' x='486' y='382' width='13' height='13'>
+		<animation sheet='catdoll' y='0'/>
+		<action command='talk' name='catdoll'>
+			<args>@! #ffffff insert description here</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='books' x='780' y='886' width='50' height='20' depthing='1' collidable='true'>
+		<animation sheet='books' y='-133' x='-25'/>
+		<action command='talk' name='books'>
+			<args>@! #ffffff insert description here</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='table' x='797' y='810' width='13' height='13' depthing='1'>
+		<animation sheet='table' y='-235'/>
+	</sprite>
+	
+	<sprite name='bookshelf' x='1119' y='610' width='13' height='13' depthing='1'>
+		<animation sheet='bookshelf' y='-426'/>
+	</sprite>
+	
+	<sprite name='bow' x='134' y='513' width='13' height='13' depthing='3'>
+		<animation sheet='bow' y='0'/>
+	</sprite>
+	
+	<sprite name='violin' x='100' y='410' width='13' height='13' depthing='3'>
+		<animation sheet='violin' y='0'/>
+		<action command='talk' name='Play.'><args> @! #ffffff not done yet!!!!!!!!!!!! </args></action>
+	</sprite>
+	
+	<sprite name='drawers' x='78' y='688' width='13' height='13' depthing='1'>
+		<animation sheet='drawers' y='-198'/>
+	</sprite>
+	
+	<sprite name='door' x='964' y='157' width='13' height='13' depthing='1'>
+		<animation sheet='door'/>
+		<action command='talk' name='Exit.'><args> @! #ffffff not done yet!!!!!!!!!!!! </args></action>
+	</sprite>
+   
+   <!-- here we're adding in our BG and FG. This is the second half of our 
+   optimization. To avoid creating a dozen sprites for every single tile, we
+   specify that this image has been sliced up into tiles. Then we just specify
+   how many there are and how big they are, and the system will find all of them
+   and tile them correctly based on their names. This also makes it very easy
+   to transition from using one big image to a sliced up one. -->
+   
+   <!-- Note no depthing specification puts a sprite in the background. Not 
+   specifying coordinates also puts them at (0,0) by default (top-left corner). -->
+    <sprite name='firstRoomBG'>
+		<animation sheet='firstRoomBG'/>
+    </sprite>
+
+		<!-- note depthing='2' is what puts this in the foreground -->
+	<!--sprite name='firstRoomFG' depthing='2'>
+		<animation sheet='firstRoomFG'/>
+    </sprite -->
+  </room>
+  
+</rooms>
+</sburb>
