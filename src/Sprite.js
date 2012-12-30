@@ -49,22 +49,23 @@ Sprite.prototype.update = function(curRoom){
 			this.animation.update();
 		}
 	}
+	
+}
+
+Sprite.prototype.draw = function(){
+	if(this.animation){
+		this.animation.draw(this.x,this.y);
+	}
 	if(Sburb.engineMode === "strife" && !Sburb.chooser.choosing){
 		var x = Sburb.Mouse.x + Sburb.Stage.x;
 		var y = Sburb.Mouse.y + Sburb.Stage.y;
-		if(this.collidable && this.hitsPoint(x,y)){
+		if(this.collidable && this.isVisuallyUnder(x,y)){
 			if(Sburb.buttons["mouse"]){
 				Sburb.buttons["mouse"].startAnimation("state1");
 			} else {
 				Sburb.Stage.style.cursor = "pointer";
 			}	
 		}
-	}
-}
-
-Sprite.prototype.draw = function(){
-	if(this.animation){
-		this.animation.draw(this.x,this.y);
 	}
 }
 

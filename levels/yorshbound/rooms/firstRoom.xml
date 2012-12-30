@@ -1,3 +1,8 @@
+<!-- the completed first room
+     any sprite that has an action associated with it is clickable. the name is what text appears in the yellow boxes when you
+	 click on them, and the args are a more detailed descripton that pops up after. if you don't want anything to be clickable,
+	 leave the text alone and i'll remove it.               tinaun -->
+
 <sburb description="first room">
 
 <dependencies>
@@ -9,16 +14,29 @@
   <asset name='firstRoomBG' type='graphic'>rooms/roseRoomBG.png</asset>
   <asset name='firstRoomMap' type='graphic'>rooms/roseRoomMap.png</asset>
   
-  <!-- an item to be found in a chest, nothing special about it-->
+  <!-- items SO MUCH STUFF OH MY GOD-->
   <asset name='knittingBag' type='graphic'>objects/items/knittingBag.png</asset>
   <asset name='journal' type='graphic'>objects/items/journals.png</asset>
   <asset name='books' type='graphic'>objects/items/books.png</asset>
   <asset name='bow' type='graphic'>objects/items/bow.png</asset>
   <asset name='violin' type='graphic'>objects/items/violin.png</asset>
   <asset name='table' type='graphic'>objects/items/table.png</asset>
+  <asset name='grimore' type='graphic'>objects/items/grimore.png</asset>
+  <asset name='computer' type='graphic'>objects/items/laptop.png</asset>
   <asset name='drawers' type='graphic'>objects/items/drawers.png</asset>
   <asset name='bookshelf' type='graphic'>objects/items/bookcase.png</asset>
   <asset name='catdoll' type='graphic'>objects/items/catdoll.png</asset>
+  <asset name='scarfcat' type='graphic'>objects/items/scarfcat.png</asset>
+  <asset name='cathead' type='graphic'>objects/items/scarfhead.png</asset>
+   <asset name='squiddleorange' type='graphic'>objects/items/squiddleorange.png</asset>
+   <asset name='squiddlepurple' type='graphic'>objects/items/squiddlepurple.png</asset>
+   <asset name='squiddlepink' type='graphic'>objects/items/squiddlepink.png</asset>
+   <asset name='squiddleblue' type='graphic'>objects/items/squiddleblue.png</asset>
+   <asset name='water' type='graphic'>objects/items/water.png</asset>
+   <asset name='bucket1' type='graphic'>objects/items/bucket1.png</asset>
+   <asset name='bucket2' type='graphic'>objects/items/bucket2.png</asset>
+   <asset name='pottedplant' type='graphic'>objects/items/pottedplant.png</asset>
+   <asset name='plantfood' type='graphic'>objects/items/plantfood.png</asset>
   <asset name='door' type='graphic'>objects/items/door.png</asset>
 </assets>
 
@@ -30,9 +48,10 @@ safe than sorry.-->
   
 	
 	<fighter class='rose' name='rose' x = '400' y = '700'>
-		<action command='talk' name='insert description here'>
-			<args>@! #ffffff insert description here</args>
-		</action>	
+		<action command='talk' name="That's you!">
+			<args>@! #ffffffDon't you look nice!</args>
+		</action>
+		<action class='start' />	
 	</fighter>
 	
   	<!-- here we're adding a standard chest based on a template class found in
@@ -40,33 +59,114 @@ safe than sorry.-->
 	
 	<sprite name='knittingBag' x='756' y='355' width='80' height='80'>
 		<animation sheet='knittingBag' y='-57'/>
-		<action command='talk' name='knitting bag'>
-			<args>@! #ffffff insert description here</args>
+		<action command='talk' name='Examine knitting bag.'>        <!-- dont remove the ffffffand before, used for coloring text. -->
+			<args>@! #ffffffThis is your KNITTING BAG which contains all of your knitting supplies, duh. You can't help noticing that you're running low on yarn (only three reels left!).</args>
 		</action>	
 	</sprite>
 	
 	<sprite name='journal' x='629' y='350' width='13' height='13'>
 		<animation sheet='journal' y='0'/>
-		<action command='talk' name='journals'>
-			<args>@! #ffffff insert description here</args>
+		<action command='talk' name='Examine journals.'>
+			<args>@! #ffffffThese are your JOURNALS. You write normal diary entries in one. The other one doesn't have anything in it, it's a back-up.</args>
 		</action>	
 	</sprite>
 	<sprite name='catdoll' x='486' y='382' width='13' height='13'>
 		<animation sheet='catdoll' y='0'/>
-		<action command='talk' name='catdoll'>
-			<args>@! #ffffff insert description here</args>
+		<action command='talk' name='Examine doll.'>
+			<args>@! #ffffffThis is a doll that your MOTHER got for you a few years ago to replace your pet cat JASPERS who passed away. You don't particularly care for it much.</args>
 		</action>	
 	</sprite>
 	
-	<sprite name='books' x='780' y='886' width='50' height='20' depthing='1' collidable='true'>
-		<animation sheet='books' y='-133' x='-25'/>
-		<action command='talk' name='books'>
-			<args>@! #ffffff insert description here</args>
+	<sprite name='books' x='785' y='886' width='70' height='20' depthing='1' collidable='true'>
+		<animation sheet='books' y='-133' x='-30'/>
+		<action command='talk' name='Examine books.'>
+			<args>@! #ffffffYou like to write a lot, and your COMPLACENCY OF THE LEARNED series is the largest of your projects so far. You even made some hardback covers for them!</args>
 		</action>	
 	</sprite>
 	
 	<sprite name='table' x='797' y='810' width='13' height='13' depthing='1'>
 		<animation sheet='table' y='-235'/>
+	</sprite>
+	
+	<sprite name='grimore' x='877' y='810' width='13' height='13' depthing='1'>
+		<animation sheet='grimore' y='-135'/>
+		<action command='talk' name='Examine grimoire.'>
+			<args>@! #ffffffThis GRIMOIRE contains information about various MONSTERS and DEMONS, and has instructions on how to summon them, among other MAGIC SPELLS. It previously belonged to your MOTHER before you adopted the interest a few months ago. None of the spells work though, and you think it's a load of crap. It's fun to pretend, though.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='catbody' x='675' y='534' width='13' height='13' depthing='1'>
+		<animation sheet='scarfcat' y='0'/>
+	</sprite>
+	
+	<sprite name='cathead' x='741' y='647' width='14' height='10' depthing='1' collidable='true'>
+		<animation sheet='cathead' y='-50' x='-55' />
+		<action command='talk' name='Examine...whatever this is.'>
+			<args>@! #ffffffThis cat-looking thing is one of your more ambitious projects. It initially started out as a scarf, but you just kept adding more stuff on and it eventually turned into...this. You sometimes tear away pieces of it only to reapply it, for practice.</args>
+		</action>
+	</sprite>
+	
+	<sprite name='squiddleorange' x='196' y='514' width='25' height='10' depthing='3'>
+		<animation sheet='squiddleorange' x='-10'/>
+		<action command='talk' name='Examine squiddle.'>
+			<args>@! #ffffffYou used to be into the SQUIDDLE FRANCHISE but lost interest in it. You still have all these dolls from back then, so you try to damage them in any way possible so you can practice your KNITTING on them.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='squiddlepink' x='390' y='540' width='25' height='10' depthing='1' collidable='true'>
+		<animation sheet='squiddlepink' y='-46' x='-10'/>
+		<action command='talk' name='Examine squiddle.'>
+			<args>@! #ffffffYou used to be into the SQUIDDLE FRANCHISE but lost interest in it. You still have all these dolls from back then, so you try to damage them in any way possible so you can practice your KNITTING on them.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='squiddleblue' x='467' y='558' width='25' height='10' depthing='1' collidable='true'>
+		<animation sheet='squiddleblue' y='-46' x='-10'/>
+		<action command='talk' name='Examine squiddle.'>
+			<args>@! #ffffffYou used to be into the SQUIDDLE FRANCHISE but lost interest in it. You still have all these dolls from back then, so you try to damage them in any way possible so you can practice your KNITTING on them.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='squiddlepurple' x='897' y='892' width='25' height='10' depthing='1'>
+		<animation sheet='squiddlepurple' y='-246' x='-10'/>
+		<action command='talk' name='Examine squiddle.'>
+			<args>@! #ffffffYou used to be into the SQUIDDLE FRANCHISE but lost interest in it. You still have all these dolls from back then, so you try to damage them in any way possible so you can practice your KNITTING on them.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='bucket1' x='390' y='704' width='50' height='10' depthing='1'>
+		<animation sheet='bucket1' y='-89'/>
+		<action command='talk' name='Examine bucket.'>
+			<args>@! #ffffffYou leave your BUCKETS here on a rug so the water doesn't spill all over the floor.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='bucket2' x='507' y='752' width='50' height='10' depthing='1'>
+		<animation sheet='bucket2' y='-89'/>
+		<action command='talk' name='Examine bucket.'>
+			<args>@! #ffffffYou leave your BUCKETS here on a rug so the water doesn't spill all over the floor.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='plantfood' x='583' y='777' width='10' height='10' depthing='1'>
+		<animation sheet='plantfood' y='-52'/>
+		<action command='talk' name='Examine plant food.'>
+			<args>@! #ffffffYou need to keep your VINE ARMS nourished, so you do that by dunking them in water which has had some PLANT FOOD mixed in with it.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='pottedplant' x='293' y='745' width='10' height='10' depthing='1'>
+		<animation sheet='pottedplant' y='-142' x='-93'/>
+		<action command='talk' name='Examine potted plant'>
+			<args>@! #ffffffNothing beats sprucing up a boring room by adding a lovely potted plant somewhere.</args>
+		</action>	
+	</sprite>
+	
+	<sprite name='computer' x='992' y='810' width='13' height='13' depthing='1'>
+		<animation sheet='computer' y='-255'/>
+		<action command='talk' name='computer'>
+			<args>@! #ffffffYou need to take your LAPTOP somewhere where the internet connection is stronger. Once you figure out where that place is, you'll come back and pick it up. For now, it can charge up its battery.</args>
+		</action>	
 	</sprite>
 	
 	<sprite name='bookshelf' x='1119' y='610' width='13' height='13' depthing='1'>
@@ -79,7 +179,7 @@ safe than sorry.-->
 	
 	<sprite name='violin' x='100' y='410' width='13' height='13' depthing='3'>
 		<animation sheet='violin' y='0'/>
-		<action command='talk' name='Play.'><args> @! #ffffff not done yet!!!!!!!!!!!! </args></action>
+		<action command='talk' name='Play.'><args> @! #ffffffnot done yet!!!!!!!!!!!! </args></action>
 	</sprite>
 	
 	<sprite name='drawers' x='78' y='688' width='13' height='13' depthing='1'>
@@ -88,7 +188,7 @@ safe than sorry.-->
 	
 	<sprite name='door' x='964' y='157' width='13' height='13' depthing='1'>
 		<animation sheet='door'/>
-		<action command='talk' name='Exit.'><args> @! #ffffff not done yet!!!!!!!!!!!! </args></action>
+		<action command='talk' name='Exit.'><args> @! #ffffffnot done yet!!!!!!!!!!!! </args></action>
 	</sprite>
    
    <!-- here we're adding in our BG and FG. This is the second half of our 
@@ -105,9 +205,9 @@ safe than sorry.-->
     </sprite>
 
 		<!-- note depthing='2' is what puts this in the foreground -->
-	<!--sprite name='firstRoomFG' depthing='2'>
+	<sprite name='firstRoomFG' depthing='4'>
 		<animation sheet='firstRoomFG'/>
-    </sprite -->
+    </sprite>
   </room>
   
 </rooms>

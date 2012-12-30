@@ -36,7 +36,7 @@
   	<spritebutton name='helpButton' x='591' y='9' width='54' height='63' sheet='helpControl'>
   		<action command='talk' soft='true'>
   			<args>@! #FFFFFF Use the arrow keys or WASD to move, and the mouse to interact.
-				  @! #FFFFFF Programmed by tinaun, based on the Sburb by Alexis "Gankro" Bessinger
+				  @! #FFFFFF Programmed by tinaun, based on the Sburb javascript engine by Alexis "Gankro" Beingessner.
 			</args>
   		</action>
   	</spritebutton>
@@ -44,7 +44,7 @@
   	<spritebutton name='saveButton' x='558' y='18' sheet='saveControl'>
   		<action command='talk' soft='true'>
   			<args>
-  			@! Warning: this feature is experimental. Use it only if you're having stability issues and want to keep your place should the application crash. Save files are discarded when the browser is closed.
+  			@! #FFFFFF Warning: this feature is experimental. Use it only if you're having stability issues and want to keep your place should the application crash. Save files are discarded when the browser is closed.
   			</args>
 				<action command='saveOrLoad' >
 					<args></args>
@@ -59,7 +59,7 @@
   	pretty reasonable defaults, but you can mess around with them if you want -->
 		<dialoger alertPos="15,235" talkPosRight="20,120" talkPosLeft="90,120" hiddenPos="15,650"
 			spriteStartLeft="-300,450" spriteEndLeft="100,450" spriteStartRight="950,450" spriteEndRight="550,450"
-			alertTextDimensions="30,30,450,220" leftTextDimensions="150,30,350,220" rightTextDimensions="30,30,350,220"
+			alertTextDimensions="35,30,550,220" leftTextDimensions="150,30,350,220" rightTextDimensions="30,30,350,220"
 			box="dialogBox" color="#FFFFFF">
 		</dialoger>
 </hud>

@@ -470,6 +470,8 @@ Sburb.onMouseDown = function(e,canvas){
 		if(Sburb.chooser.choices.length>0){
 			beginChoosing();
 		}
+	} else if(Sburb.engineMode=="strife" && Sburb.dialoger.talking){
+		Sburb.dialoger.nudge();
 	}
 	Sburb.Mouse.down = true;
 	
@@ -565,7 +567,11 @@ function focusCamera(){
 	if(!Sburb.destFocus){
 		if(Sburb.focus){
 			Sburb.cam.x = Sburb.focus.x-Sburb.Stage.width/2;
-			Sburb.cam.y = Sburb.focus.y-Sburb.Stage.height/2;
+			if(Sburb.engineMode=="strife"){
+				Sburb.cam.y = Sburb.focus.y-Sburb.Stage.height/2 - 90;
+			}else{
+				Sburb.cam.y = Sburb.focus.y-Sburb.Stage.height/2;
+			}
 		}
 	}else if(Math.abs(Sburb.destFocus.x-Sburb.cam.x-Sburb.Stage.width/2)>4 || Math.abs(Sburb.destFocus.y-Sburb.cam.y-Sburb.Stage.height/2)>4){
 		Sburb.cam.x += (Sburb.destFocus.x-Sburb.Stage.width/2-Sburb.cam.x)/5;

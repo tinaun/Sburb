@@ -26,6 +26,7 @@ Sburb.Animation = function(name,sheet,x,y,colSize,rowSize,startPos,length,frameI
 	this.followUp = followUp;
 	this.flipX = flipX?true:false;
 	this.flipY = flipY?true:false;
+	this.imageBuffer = [];
 	
 	if(sliced){
 		this.numRows = numRows;
@@ -91,7 +92,6 @@ Sburb.Animation.prototype.nextFrame = function() {
 
 //update the animation as if a frame of time has elapsed
 Sburb.Animation.prototype.update = function(){
-	this.loadTransparentPx()
 	this.curInterval++;
 	while(this.curInterval>this.frameInterval){
 		this.curInterval-=this.frameInterval;
@@ -99,8 +99,24 @@ Sburb.Animation.prototype.update = function(){
 	}
 }
 
-Sburb.Animation.prototype.loadTransparentPx = function(){
-	var stage;
+Sburb.Animation.prototype.loadImageBuffer = function(){
+	var stage = Sburb.Pixels;
+	var height = stage.height = this.sheet.height;
+	var width = stage.width = this.sheet.width;
+	var ctx = stage.getContext("2d");
+	ctx.clearRect(0,0,width,height);
+	ctx.drawImage(this.sheet,0,0);
+	
+	// get stuff
+	console.log("Loading images....");
+	var imageData = ctx.getImageData(0,0,width,height);
+	for(var i = 0; i <= width; i++){
+		for(var j = 0; j <= height; j++){
+			this.imageBuffer[i*width + j] = imageData.data[((i*(imageData.width*4)) + (j*4))];
+		}
+	}
+	
+	ctx.clearRect(0,0,width,height);
 }
 
 //draw the animation
@@ -330,19 +346,24 @@ Sburb.Animation.prototype.setSheet = function(newSheet){
 	this.reset();
 }
 
+//is the image transparent in the given pixel
+Sburb.Animation.prototype.isTransparent = function(x,y){
+	if(this.imageBuffer[x*this.sheet.width + y] > 250){
+		return true;
+	}
+	return false;
+}
+
 //does the image render in the given pixel
 Sburb.Animation.prototype.isVisuallyUnder = function(x,y){
 	if(x>=this.x && x<=this.x+this.colSize){
 		if(y>=this.y && y<=this.y+this.rowSize){
-			if(Sburb.engineMode === "strife"){
-				return true;
-			} else {
-				return true;
-			}	
+			return !this.isTransparent(x - this.x ,y - this.y);
 		}
 	}
 	return false;
 }
+
 
 //make an exact copy of this animation
 Sburb.Animation.prototype.clone = function(x,y){
@@ -447,7 +468,9 @@ Sburb.parseAnimation = function(animationNode, assetFolder){
 	followUp = (temp = attributes.getNamedItem("followUp"))?temp.value:followUp;
 	var flipX = (temp = attributes.getNamedItem("flipX"))?temp.value!="false":false;
 	var flipY = (temp = attributes.getNamedItem("flipY"))?temp.value!="false":false;
-	return new Sburb.Animation(name,sheet,x,y,colSize,rowSize,startPos,length,frameInterval,loopNum,followUp,flipX,flipY, sliced,numCols,numRows);
+	var anim = new Sburb.Animation(name,sheet,x,y,colSize,rowSize,startPos,length,frameInterval,loopNum,followUp,flipX,flipY, sliced,numCols,numRows);
+	//anim.loadImageBuffer();
+	return anim;
 }
 
 return Sburb;
