@@ -8,6 +8,7 @@
   	 	<animation name='idleBack' sheet='roseIdleBack' x='-100' y='-280' length='2' frameInterval='4'/>
   	 	<animation name='walkBack' sheet='roseWalkBack' x='-100' y='-280' length='4' frameInterval='3'/>
 		<animation name='dance' sheet='roseDance' x='-150' y='-280' length='30' frameInterval='2'/>
+		<animation name='play' sheet='rosePlay' x='-150' y='-280' length='8' frameInterval='2'/>
 	</fighter>
 	
 	<!-- common command to "be" the character. -->
@@ -28,9 +29,9 @@
 				<args>rose,idle</args>
 				<action command='removeAction'>
 					<args>rose,stop. now. i hate it.</args>
-					<!--action command='addAction'>
-						<args>rose,<action class='start' /></args>
-					</action-->
+					<action command='setGameState' noDelay='true'>
+						<args>roseDance, false</args>
+					</action>	
 				</action>
 			</action>
 			
@@ -59,7 +60,8 @@
 	<asset name='roseIdle' type='graphic'>chars/rose/roseIdleSheet.png</asset>
 	<asset name='roseIdleBack' type='graphic'>chars/rose/roseIdleBackSheet.png</asset>
 	<asset name='roseDance' type='graphic'>chars/rose/dance.png</asset>
-
+	<asset name='rosePlay' type='graphic'>chars/rose/rosePlay.png</asset>
+	
 	<!-- her background music -->
 	<asset name='roseSong' type='audio'>audio/music/smile.ogg;audio/music/smile.mp3</asset>
 </assets>

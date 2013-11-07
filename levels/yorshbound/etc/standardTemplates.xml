@@ -38,7 +38,7 @@ unmodified. -->
 	  <action class='finish' command='goBack'>
 			<args>char</args>
 			<action command='talk'>
-				<args>@! This leads to the end of the game. Are you sure you're done here?</args>
+				<args>@! #FFFFFFThis leads to the end of the game. Are you sure you're done here?</args>
 				<action command='presentActions'>
 					<args>
 						<action command='fadeOut' name='Yes.'>

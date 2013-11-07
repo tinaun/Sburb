@@ -67,6 +67,17 @@ Sprite.prototype.draw = function(){
 			}	
 		}
 	}
+	if(Sburb.debugger.open){
+		this.drawHitBox();
+	}
+}
+
+Sprite.prototype.drawHitBox = function(){
+	Sburb.stage.strokeStyle = "#ff00ff";
+	if(this instanceof Sburb.SpriteButton)
+		Sburb.stage.strokeRect(this.x,this.y,this.width,this.height);
+	else
+		Sburb.stage.strokeRect(this.x - this.width/2,this.y - this.height/2,this.width,this.height);
 }
 
 

@@ -1022,9 +1022,12 @@ function parseHud(input){
 		for(var i=0;i<children.length;i++){
 			var child = children[i];
 
-			if(child.nodeName == "spritebutton"){
+			if(child.nodeName === "spritebutton"){
 				var name = child.attributes.getNamedItem("name").value;
   				Sburb.hud[name] = Sburb.buttons[name];
+			} else if (child.nodeName === "sprite"){
+				var name = child.attributes.getNamedItem("name").value;
+				Sburb.hud[name] = Sburb.sprites[name];
 			}
 		}
 	}

@@ -89,7 +89,7 @@ Sburb.Debugger.prototype.draw = function() {
         Sburb.stage.lineWidth = 9;
         Sburb.stage.strokeStyle = "#000000";
         Sburb.stage.beginPath();
-        for(var i = 0; i <= Sburb.Stage.height; i += 10) {
+        for(var i = Sburb.Stage.height*4/5; i <= Sburb.Stage.height; i += 10) {
             Sburb.stage.moveTo(0,i);
             Sburb.stage.lineTo(Sburb.Stage.width,i);
         }
@@ -106,7 +106,9 @@ Sburb.Debugger.prototype.draw = function() {
             } else {
                 Sburb.stage.fillStyle = "#000000";
             }
-            Sburb.stage.fillText(this.errors[error].text,10,y);
+			if(y > Sburb.Stage.height*4/5){
+				Sburb.stage.fillText(this.errors[error].text,10,y);
+			}	
         }
         // Display test status
         var y = 70;

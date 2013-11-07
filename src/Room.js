@@ -203,10 +203,13 @@ Sburb.Room.prototype.queryActions = function(query,x,y){
 //query the room for an action based on visual collisions
 Sburb.Room.prototype.queryActionsVisual = function(query,x,y){
 	var validActions = [];
-	for(var i=0;i<this.sprites.length;i++){
+	for(var i=this.sprites.length - 1;i>= 0;i--){
 		var sprite = this.sprites[i];
 		if(sprite.isVisuallyUnder(x,y)){
 			validActions = validActions.concat(sprite.getActions(query));
+			if(validActions.length > 0){
+				return validActions;
+			}
 		}
 	}
 	return validActions;

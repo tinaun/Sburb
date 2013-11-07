@@ -66,9 +66,7 @@ commands.changeChar = function(info){
 	Sburb.char.becomeNPC();
 	Sburb.char.moveNone();
 	Sburb.char.walk();
-	if(Sburb.gameMode === "strife"){
-		Sburb.char.idle();
-	}	
+	Sburb.char.idle();
 	Sburb.destFocus = Sburb.char = Sburb.sprites[info];
 	Sburb.char.becomePlayer();
 	Sburb.setCurRoomOf(Sburb.char);
@@ -282,7 +280,10 @@ commands.macro = function(info){
 //Wait for the specified event before continuing the current queue
 //syntax: Event syntax
 commands.sleep = function(info){
-	return new Sburb.Trigger(info);
+	var params = parseParams(info);
+	var actionString = params[params.length - 1];
+    var actions = parseActionString(actionString);
+	return new Sburb.Trigger(info, actions[0]);
 }
 
 //Pauses an actionQueue, it can be resumed with resumeActionQueue
@@ -364,8 +365,14 @@ commands.addSprite = function(info){
 commands.removeSprite = function(info){
 	var params = parseParams(info);
 	var sprite = Sburb.sprites[params[0]];
-	var room = Sburb.rooms[params[1]];
-	room.removeSprite(sprite);
+	var removal = params[1];
+	if(params[1] === "hud"){
+		var button = params[0];
+		delete Sburb.hud[button];
+	}else{
+		var room = Sburb.rooms[params[1]];
+		room.removeSprite(sprite);
+	}	
 }
 
 //Clone the specified sprite with a new name

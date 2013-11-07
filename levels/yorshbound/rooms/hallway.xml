@@ -1,0 +1,86 @@
+<sburb description='hallway'>
+	
+	<!-- no dependencies, rose is already loaded -->
+	
+	<assets>
+		<asset name='hallwayBG' type='graphic'>rooms/hallwayBG.png</asset>
+		<asset name='hallwayFG' type='graphic'>rooms/hallwayFG.png</asset>
+		<asset name='hallwayMap' type='graphic'>rooms/hallwayMap.png</asset>
+		<asset name='stairs' type='graphic'>objects/items/hallway/stairs.png</asset>
+		<asset name='pointer' type='graphic'>objects/items/hallway/pointer.png</asset>
+		<asset name='corner' type='graphic'>objects/items/hallway/corner.png</asset>
+		<asset name='statue2' type='graphic'>objects/items/hallway/statue2.png</asset>
+		<asset name='pedistal' type='graphic'>objects/items/hallway/pedistal2.png</asset>
+		<asset name='roseDoor' type='graphic'>objects/items/hallway/roseDoor.png</asset>
+		
+		
+		<!--
+		<asset name='pictureUnicorn' type='graphic'>rooms/hallwayMap.png</asset>
+		<asset name='pictureCats' type='graphic'>rooms/hallwayMap.png</asset>
+		<asset name='pictureWizard' type='graphic'>rooms/hallwayMap.png</asset>
+		
+		<asset name='ObservatoryDoor' type='graphic'>rooms/hallwayMap.png</asset>
+		<asset name='stairsBelow' type='graphic'>rooms/hallwayMap.png</asset>  -->
+	</assets>
+	
+	<rooms>
+		<room name='hallway' walkableMap='hallwayMap' scale='4'>
+			<triggers>
+				<trigger>
+					<args>inPath,rose,2720,710,2900,900,3100,600</args>
+						<action command = 'deltaSprite'>
+							<args>rose,-10,10</args>
+							<action command='talk'>
+								<args>@! #ffffffcan't go that way!</args>
+							</action>
+						</action>	 
+				</trigger>		
+			</triggers>
+		
+			
+			<sprite name='statue2' x="1664" y="206">
+				<animation sheet='statue2'/>
+				<action name="Examine small figurine." command="talk"> 
+					<args>@! #ffffff Stupid wizard statue.</args> 
+				</action>
+			</sprite>
+			
+			<sprite name='pedistal2' x="1792" y="452" width='10' height='10' depthing='1' collidable='true'>
+				<animation sheet='pedistal' x="-107"/>
+			</sprite>
+			
+			<sprite name='stairs' x="2210" y="880">
+				<animation sheet='stairs'/>
+			</sprite>
+			
+			<sprite name='corner' x="2828" y="950" depthing ='1'>
+				<animation sheet='corner' y='-517'/>
+			</sprite>
+			
+			<sprite name='roseDoor' x='1000' y='300' depthing = '1'>
+				<animation sheet='roseDoor'/>
+					<action command='changeRoomRemote' name='Go Back.'>
+						<args>rooms/firstRoom.xml,firstRoom,1100,650</args>	
+					</action>
+			</sprite>
+			
+			<sprite name='pointer' x='2210' y ='1100'>
+				<animation sheet='pointer' length='9' frameInterval='3'/>
+				<action name='Descend stairs.' command='talk'>
+					<args>@! #ffffffone way trip....</args>
+					<action command='changeRoomRemote' name='Exit.'>
+						<args>rooms/livingroom.xml,livingRoom,1700,800</args>	
+					</action>
+				</action>
+			</sprite>
+			
+			<sprite name='hallwayBG'>
+				<animation sheet='hallwayBG'/>
+			</sprite>
+			<sprite name='hallwayFG' depthing='4'>
+				<animation sheet='hallwayFG'/>
+			</sprite>
+		</room>
+	</rooms>
+
+</sburb>

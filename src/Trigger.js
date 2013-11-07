@@ -11,7 +11,7 @@ var Sburb = (function(Sburb){
 
 //constructor
 Sburb.Trigger = function(info,action,followUp,restart,detonate,operator){
-	//console.log("Trigger constructor with: "+info, info);
+	console.log("Trigger constructor with: "+info, info);
 	if(typeof info == "string"){
 		info = [info];
 	}
@@ -29,7 +29,7 @@ Sburb.Trigger = function(info,action,followUp,restart,detonate,operator){
 		var inf = this.info[i].trim();
 		var params = inf.split(",");
 		var type = params[0];
-		//console.log("parsed trigger args: "+type+"("+inf+")");
+		console.log("parsed trigger args: "+type+"("+inf+")");
 		this.events[i] = new Sburb.events[type](inf);
 	}
 	this.reset();

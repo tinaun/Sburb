@@ -87,6 +87,29 @@ events.inBox = function(info) {
 	}
 };
 
+//Check if a sprite is in the given path
+//spriteName , path points
+events.inPath = function(info) {
+	var params = parseParams(info);
+	var path = new Sburb.Path();
+	for (var i = 2; i < params.length; i += 2){
+		path.push({x:parseInt(params[i]),y:parseInt(params[i+1])});
+	}
+	this.reset = function() {
+		if(params[1]=="char"){
+			this.entity = params[1];
+		}else{
+			this.entity = Sburb.sprites[params[1]];
+		}
+	}
+	this.checkCompletion = function(){
+		var entity = this.entity;
+		if(this.entity=="char"){
+			entity = Sburb.char;
+		}
+		return path.query({x:entity.x,y:entity.y});
+	}
+}
 events.inBox2 = function(info){
 	var params = parseParams(info);
 	var x1 = parseInt(params[2]);

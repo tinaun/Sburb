@@ -1,0 +1,115 @@
+<sburb description="parlor">
+
+<assets>
+  <asset name='thirdRoomFG' type='graphic'>rooms/thirdRoomFG.png</asset>
+  <asset name='thirdRoomBG' type='graphic'>rooms/thirdRoomBG.png</asset>
+  <asset name='thirdRoomMap' type='graphic'>rooms/thirdRoomMap.png</asset>
+  
+  <!-- more -->
+</assets>
+
+<rooms>
+	<room name='parlor' walkableMap='thirdRoomMap' scale='4'>
+
+		<!-- exits -->
+		<sprite name='door' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='door' y='-142' x='-93'/>
+			<action command='changeRoomRemote' name='enter name here'>
+				<args>/livingRoom.xml,1500,1000</args>
+			</action>	
+		</sprite>
+		
+		<!-- objects -->
+		<sprite name='window' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='window' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='rug1' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='rug1' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='rug2' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='rug2' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='paintingRose' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='paintingRose' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='paintingMom' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='paintingMom' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='desk' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='desk' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='pottedPlant' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='pottedPlant' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='couchCushion' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='couchCushion' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<sprite name='chandelier' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
+			<animation sheet='chandelier' y='-142' x='-93'/>
+			<action command='talk' name='enter name here'>
+				<args>@! #ffffffEnter description here</args>
+			</action>	
+		</sprite>
+		
+		<!-- other sprites -->
+		
+		
+		<sprite name='couch'>
+			<animation sheet='couch'/>
+		</sprite>
+		
+		<sprite name='chair1'>
+			<animation sheet='chair1'/>
+		</sprite>
+		
+		<sprite name='chair2'>
+			<animation sheet='chair2'/>
+		</sprite>
+		
+		<sprite name='tree'>
+			<animation sheet='tree'/>
+		</sprite>
+		
+		<sprite name='chanderLight'>
+			<animation sheet='chanderLight'/>
+		</sprite>
+
+		<sprite name='thirdRoomFG' depthing='4'>
+			<animation sheet='thirdRoomFG'/>
+		</sprite>
+	</room>
+  
+</rooms>
+</sburb>

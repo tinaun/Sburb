@@ -23,20 +23,21 @@
   <asset name='table' type='graphic'>objects/items/table.png</asset>
   <asset name='grimore' type='graphic'>objects/items/grimore.png</asset>
   <asset name='computer' type='graphic'>objects/items/laptop.png</asset>
+  <asset name='powercord' type='graphic'>objects/items/powercord.png</asset>
   <asset name='drawers' type='graphic'>objects/items/drawers.png</asset>
   <asset name='bookshelf' type='graphic'>objects/items/bookcase.png</asset>
   <asset name='catdoll' type='graphic'>objects/items/catdoll.png</asset>
   <asset name='scarfcat' type='graphic'>objects/items/scarfcat.png</asset>
   <asset name='cathead' type='graphic'>objects/items/scarfhead.png</asset>
-   <asset name='squiddleorange' type='graphic'>objects/items/squiddleorange.png</asset>
-   <asset name='squiddlepurple' type='graphic'>objects/items/squiddlepurple.png</asset>
-   <asset name='squiddlepink' type='graphic'>objects/items/squiddlepink.png</asset>
-   <asset name='squiddleblue' type='graphic'>objects/items/squiddleblue.png</asset>
-   <asset name='water' type='graphic'>objects/items/water.png</asset>
-   <asset name='bucket1' type='graphic'>objects/items/bucket1.png</asset>
-   <asset name='bucket2' type='graphic'>objects/items/bucket2.png</asset>
-   <asset name='pottedplant' type='graphic'>objects/items/pottedplant.png</asset>
-   <asset name='plantfood' type='graphic'>objects/items/plantfood.png</asset>
+  <asset name='squiddleorange' type='graphic'>objects/items/squiddleorange.png</asset>
+  <asset name='squiddlepurple' type='graphic'>objects/items/squiddlepurple.png</asset>
+  <asset name='squiddlepink' type='graphic'>objects/items/squiddlepink.png</asset>
+  <asset name='squiddleblue' type='graphic'>objects/items/squiddleblue.png</asset>
+  <asset name='water' type='graphic'>objects/items/water.png</asset>
+  <asset name='bucket1' type='graphic'>objects/items/bucket1.png</asset>
+  <asset name='bucket2' type='graphic'>objects/items/bucket2.png</asset>
+  <asset name='pottedplant' type='graphic'>objects/items/pottedplant.png</asset>
+  <asset name='plantfood' type='graphic'>objects/items/plantfood.png</asset>
   <asset name='door' type='graphic'>objects/items/door.png</asset>
 </assets>
 
@@ -46,16 +47,61 @@ safe than sorry.-->
 <rooms>
   <room name='firstRoom' walkableMap='firstRoomMap' scale='4'>
   
+	<triggers>
+		<!--trigger>
+			<args>spriteProperty,char,x>0</args>
+			<action command='removeSprite'>
+				<args>alertSheet,hud</args>
+				<action command='changeRoomRemote' name='Exit.'><args>rooms/hallway.xml,hallway,2470,900</args>
+					<action command="toggleVolume"></action>
+				</action>	
+			</action>
+		</trigger-->
+		
+		<trigger>
+			<args>gameState,isPlaying=true</args>
+			<trigger>
+				<args>time,65</args>
+				<action command="setGameState">
+					<args>isPlaying,false</args>
+					<action command="talk">
+						<args>@! #ffffffThis is fun and all, but you better hurry up!</args>
+						<action command="startAnimation">
+							<args>rose,idle</args>
+							<action command='addSprite'>
+								<args>bow, firstRoom</args>
+								<action command='addSprite'>
+									<args>violin, firstRoom</args>
+								</action>
+							</action>		
+						</action>
+					</action>	
+				</action>
+			</trigger>
+		</trigger>
+		<trigger>
+			<args>gameState,isJumping=true</args>
+			<trigger>
+				<args>time,65</args>
+				<action command="setGameState">
+					<args>isJumping,false</args>
+					<action command="talk">
+						<args>@! #ffffffThis is incredibly silly!!</args>
+						<action command="startAnimation">
+							<args>rose,idle</args>
+						</action>
+					</action>	
+				</action>
+			</trigger>
+		</trigger>
+	</triggers>
+  
 	
-	<fighter class='rose' name='rose' x = '400' y = '700'>
+	<fighter class='rose' name='rose' x = '330' y = '600'>
 		<action command='talk' name="That's you!">
 			<args>@! #ffffffDon't you look nice!</args>
-		</action>
-		<action class='start' />	
+		</action>	
 	</fighter>
-	
-  	<!-- here we're adding a standard chest based on a template class found in
-  	etc/standardTemplates.xml -->
 	
 	<sprite name='knittingBag' x='756' y='355' width='80' height='80'>
 		<animation sheet='knittingBag' y='-57'/>
@@ -68,7 +114,13 @@ safe than sorry.-->
 		<animation sheet='journal' y='0'/>
 		<action command='talk' name='Examine journals.'>
 			<args>@! #ffffffThese are your JOURNALS. You write normal diary entries in one. The other one doesn't have anything in it, it's a back-up.</args>
-		</action>	
+		</action>
+	    <action command='startAnimation' name='Dance on the bed'>
+			<args>rose,dance</args>
+			<action command ='setGameState'>
+				<args>isJumping,true</args>
+			</action>
+		</action>
 	</sprite>
 	<sprite name='catdoll' x='486' y='382' width='13' height='13'>
 		<animation sheet='catdoll' y='0'/>
@@ -134,28 +186,32 @@ safe than sorry.-->
 		</action>	
 	</sprite>
 	
-	<sprite name='bucket1' x='390' y='704' width='50' height='10' depthing='1'>
-		<animation sheet='bucket1' y='-89'/>
+	<sprite name='water' x='400' y='680'>
+		<animation sheet='water'/>	
+	</sprite>
+	
+	<sprite name='bucket1' x='450' y='704' width='50' height='10' depthing='1' collidable='true'>
+		<animation sheet='bucket1' y='-89' x='-60'/>
 		<action command='talk' name='Examine bucket.'>
 			<args>@! #ffffffYou leave your BUCKETS here on a rug so the water doesn't spill all over the floor.</args>
 		</action>	
 	</sprite>
 	
-	<sprite name='bucket2' x='507' y='752' width='50' height='10' depthing='1'>
-		<animation sheet='bucket2' y='-89'/>
+	<sprite name='bucket2' x='567' y='752' width='50' height='10' depthing='1' collidable='true'>
+		<animation sheet='bucket2' y='-89' x='-60'/>
 		<action command='talk' name='Examine bucket.'>
 			<args>@! #ffffffYou leave your BUCKETS here on a rug so the water doesn't spill all over the floor.</args>
 		</action>	
 	</sprite>
 	
-	<sprite name='plantfood' x='583' y='777' width='10' height='10' depthing='1'>
+	<sprite name='plantfood' x='583' y='777' width='15' height='10' depthing='1' collidable='true'>
 		<animation sheet='plantfood' y='-52'/>
 		<action command='talk' name='Examine plant food.'>
 			<args>@! #ffffffYou need to keep your VINE ARMS nourished, so you do that by dunking them in water which has had some PLANT FOOD mixed in with it.</args>
 		</action>	
 	</sprite>
 	
-	<sprite name='pottedplant' x='293' y='745' width='10' height='10' depthing='1'>
+	<sprite name='pottedplant' x='293' y='745' width='10' height='10' depthing='1' collidable='true'>
 		<animation sheet='pottedplant' y='-142' x='-93'/>
 		<action command='talk' name='Examine potted plant'>
 			<args>@! #ffffffNothing beats sprucing up a boring room by adding a lovely potted plant somewhere.</args>
@@ -164,9 +220,13 @@ safe than sorry.-->
 	
 	<sprite name='computer' x='992' y='810' width='13' height='13' depthing='1'>
 		<animation sheet='computer' y='-255'/>
-		<action command='talk' name='computer'>
+		<action command='talk' name='Examine Computer.'>
 			<args>@! #ffffffYou need to take your LAPTOP somewhere where the internet connection is stronger. Once you figure out where that place is, you'll come back and pick it up. For now, it can charge up its battery.</args>
 		</action>	
+	</sprite>
+	
+	<sprite name='powercord' x='1112' y='870' width='13' height='13' depthing='1'>
+		<animation sheet='powercord' y='-214'/>
 	</sprite>
 	
 	<sprite name='bookshelf' x='1119' y='610' width='13' height='13' depthing='1'>
@@ -179,7 +239,18 @@ safe than sorry.-->
 	
 	<sprite name='violin' x='100' y='410' width='13' height='13' depthing='3'>
 		<animation sheet='violin' y='0'/>
-		<action command='talk' name='Play.'><args> @! #ffffffnot done yet!!!!!!!!!!!! </args></action>
+		<action command='removeSprite' name='Play.'>
+			<args>bow, firstRoom</args>
+			<action command='removeSprite'>
+				<args>violin, firstRoom</args>
+				<action command='startAnimation'>
+					<args>rose,play</args>
+					<action command ='setGameState'>
+						<args>isPlaying,true</args>
+					</action>
+				</action>
+			</action>
+		</action>	
 	</sprite>
 	
 	<sprite name='drawers' x='78' y='688' width='13' height='13' depthing='1'>
@@ -188,7 +259,12 @@ safe than sorry.-->
 	
 	<sprite name='door' x='964' y='157' width='13' height='13' depthing='1'>
 		<animation sheet='door'/>
-		<action command='talk' name='Exit.'><args> @! #ffffffnot done yet!!!!!!!!!!!! </args></action>
+        <action command='talk' name='Exit.'>
+			<args>@! #ffffffWarning: from here on out, it gets pretty barebones.</args>
+			<action command='changeRoomRemote' name='Exit.'>
+				<args>rooms/hallway.xml,hallway,900,800</args>
+			</action>
+		</action>	
 	</sprite>
    
    <!-- here we're adding in our BG and FG. This is the second half of our 

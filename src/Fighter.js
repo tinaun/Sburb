@@ -243,7 +243,7 @@ Sburb.Fighter.prototype.tryToMove = function(room){
 				this.hurt();
 			}
 		}
-		console.log(Sburb.char.health + " " +  collides.health + " " +collides.vx);
+		//console.log(Sburb.char.health + " " +  collides.health + " " +collides.vx);
 		var tx = 0;
 		var ty = 0;
 		var theta = Math.atan2(this.y-collides.y,this.x-collides.x);

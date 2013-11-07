@@ -1,0 +1,174 @@
+<sburb descripton = 'living room'>
+	<assets>
+		<asset name='livingRoomBG' type='graphic'>rooms/livingRoomBG.png</asset>
+		<asset name='livingRoomFG' type='graphic'>rooms/livingRoomFG.png</asset>
+		<asset name='livingRoomMap' type='graphic'>rooms/livingRoomMap.png</asset>
+		
+		<!-- items -->
+		<asset name='giantStatue' type='graphic'>objects/items/livingRoom/giantStatue.png</asset>
+		<asset name='octopusStatue' type='graphic'>objects/items/livingRoom/octopus.png</asset>
+		
+		<!-- more to come -->
+		
+		<!-- misc -->
+		
+	</assets>
+	
+	<rooms>
+		<room name = 'livingRoom' walkableMap='livingRoomMap' scale='4'>
+			
+			<triggers>
+				<!-- try to go downstairs -->
+				<trigger>
+					inBox2,char,0,0,0,0
+					<action command ='talk'>
+						<args>@! #ffffff insert desc here </args>
+					</action>	
+				</trigger>
+				<!-- try to go down back hall -->
+				<trigger>
+					inBox2,char,0,0,0,0
+					<action command ='talk'>
+						<args>@! #ffffff insert desc here </args>
+					</action>	
+				</trigger>
+			</triggers>
+			
+			<!-- objects -->
+			<!--
+			<sprite name='bottles1' x='501' y='1500' collidable='true' depthing='1'>
+				<animation sheet='bottles1' x='-80' y='-1193'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='bottles2' x='501' y='1500' collidable='true' depthing='1'>
+				<animation sheet='bottles2' x='-80' y='-1193'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='bottles3' x='501' y='1500' collidable='true' depthing='1'>
+				<animation sheet='bottles3' x='-80' y='-1193'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='yam' x='501' y='1500' collidable='true' depthing='1'>
+				<animation sheet='yam' x='-80' y='-1193'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='magnets' x='501' y='1500' collidable='true' depthing='1'>
+				<animation sheet='magnets' x='-80' y='-1193'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='bottles2' x='501' y='1500' collidable='true' depthing='1'>
+				<animation sheet='bottles2' x='-80' y='-1193'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			  -->
+			
+			<!-- statues -->
+			<sprite name='giantStatue' x='501' y='1500' collidable='true' depthing='1'>
+				<animation sheet='giantStatue' x='-80' y='-1193'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='octopusStatue' x='1801' y='1370' width='250' height='50' collidable='true' depthing='1'>
+				<animation sheet='octopusStatue' x='-250' y='-500'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<!--
+			<sprite name='fthluluStatue' x='1801' y='1370' width='250' height='50' collidable='true' depthing='1'>
+				<animation sheet='fthluluStatue' x='-250' y='-500'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='wizardStatue' x='1801' y='1370' width='250' height='50' collidable='true' depthing='1'>
+				<animation sheet='wizardStatue' x='-250' y='-500'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			<sprite name='doll' x='1801' y='1370' width='250' height='50' collidable='true' depthing='1'>
+				<animation sheet='doll' x='-250' y='-500'/>
+				<action command='talk' name='enter name of command'>
+					<args>@! #ffffffenter description here</args>
+				</action>
+			</sprite>
+			
+			
+			
+			<sprite name='upStairs' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='stairs2'/>
+				<action command='changeRoomRemote' name='Exit.'><args>rooms/hallway.xml,hallway,1050,750</args></action>
+			</sprite>
+			
+			<sprite name='parlorDoor' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='parlorDoor'/>
+				<action command='changeRoomRemote' name='Exit.'><args>rooms/parlor.xml,hallway,1050,750</args></action>
+			</sprite>
+			
+			<sprite name='exitDoor' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='exitDoor'/>
+				<action command='talk' name='Exit.'><args>@! #ffffff insert desc here</args></action>
+			</sprite>
+			
+			<sprite name='mother' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='mother'/>
+				<action command='talk' name='Exit.'><args>@! #ffffff insert desc here</args></action>
+			</sprite>
+			
+			-->
+			
+			<!-- non-interactive (can add actions if you want) -->
+			<!--
+			<sprite name='table1' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='table1'/>
+			</sprite>
+			
+			<sprite name='table2' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='table2'/>
+			</sprite>
+			
+			<sprite name='couch' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='couch'/>
+			</sprite>
+			
+			<sprite name='bookshelf' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='bookshelf'/>
+			</sprite>
+			
+			<sprite name='fridge' x='964' y='157' width='13' height='13' depthing='1'>
+				<animation sheet='fridge'/>
+			</sprite>  
+              -->			
+			
+			<sprite name='livingRoomFG' depthing='3'>
+				<animation sheet='livingRoomFG'/>
+			</sprite>
+			<sprite name='livingRoomBG'>
+				<animation sheet='livingRoomBG'/>
+			</sprite>
+		</room>
+	</rooms>	
+</sburb>

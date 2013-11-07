@@ -19,9 +19,9 @@
   <asset name='volumeControl' type='graphic'>interface/volumeControl.png</asset>
   <asset name='saveControl' type='graphic'>interface/save_icon.png</asset>
   <asset name='helpControl' type='graphic'>interface/helpControl.png</asset>
-
-  <asset name='dialogBox' type='graphic'>interface/dialogBox.png</asset>
   <asset name='closeButtonSheet' type='graphic'>interface/closeconversation.png</asset>
+  <asset name='dialogBox' type='graphic'>interface/dialogBox.png</asset>
+  <asset name='alertSheet' type='graphic'>interface/alertSheet.png</asset>
   
 </assets>
 
@@ -32,25 +32,34 @@
   	<spritebutton name='volumeButton' x='9' y='9' width='54' height='36' sheet='volumeControl'>
   		<action command='toggleVolume' silent='true'></action>
   	</spritebutton>
+	
+	<sprite name='alertSheet' x='460' y='40' depthing='10'>
+		<animation sheet='alertSheet' length='4' frameinterval='3'/>
+	</sprite>
   	
-  	<spritebutton name='helpButton' x='591' y='9' width='54' height='63' sheet='helpControl'>
-  		<action command='talk' soft='true'>
-  			<args>@! #FFFFFF Use the arrow keys or WASD to move, and the mouse to interact.
-				  @! #FFFFFF Programmed by tinaun, based on the Sburb javascript engine by Alexis "Gankro" Beingessner.
-			</args>
+  	<spritebutton name='helpButton' x='585' y='9' width='56' height='27' sheet='helpControl'>
+		<action command='removeSprite' soft='true'>
+			<args>alertSheet,hud</args>
+			<action command='talk' soft='true'>
+				<args>@! #FFFFFFUse the arrow keys or WASD to move, and the mouse to interact.
+					  @! #FFFFFFProgrammed by tinaun, based on the Sburb javascript engine by Alexis "Gankro" Beingessner.
+				</args>
+			</action>	
   		</action>
   	</spritebutton>
   	
-  	<spritebutton name='saveButton' x='558' y='18' sheet='saveControl'>
+  	<spritebutton name='saveButton' x='610' y='400' sheet='saveControl'>
   		<action command='talk' soft='true'>
   			<args>
-  			@! #FFFFFF Warning: this feature is experimental. Use it only if you're having stability issues and want to keep your place should the application crash. Save files are discarded when the browser is closed.
+  			@! #FFFFFFWarning: this feature is experimental. Use it only if you're having stability issues and want to keep your place should the application crash. Save files are discarded when the browser is closed.
   			</args>
 				<action command='saveOrLoad' >
 					<args></args>
 				</action>
   		</action>
   	</spritebutton>
+	
+	<!-- custom mouse sprites -->
 	
 	<spritebutton name='mouse' x='650' y='450' sheet='mouseSheet' width='63' height='78'>
 	</spritebutton>
